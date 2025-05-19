@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./shop-app  # Измените контекст сборки
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./shop-app:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
