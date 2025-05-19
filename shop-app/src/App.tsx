@@ -3,6 +3,8 @@ import { AuthProvider } from './context/AuthContext';
 import LoginForm from './components/Auth/LoginForm';
 import RegisterForm from './components/Auth/RegisterForm';
 import HomePage from './components/HomePage';
+import Cart from './components/Cart/Cart'
+import ProductDetails from "./components/ProductDetails.tsx";
 
 function App() {
     return (
@@ -12,6 +14,8 @@ function App() {
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/watches/:id" element={<ProductDetails />} />
                 </Routes>
             </Router>
         </AuthProvider>
