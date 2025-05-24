@@ -59,18 +59,19 @@ export default function Cart() {
 
     const removeItem = async (itemId: number) => {
         try {
-            await axios.delete(
+            await axios.post(
                 `${import.meta.env.VITE_API_URL}/api/cart/carts/remove-item/`,
+                { watch_id: itemId},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
                     },
-                    data: { item_id: itemId }
+
                 }
             )
             fetchCart()
         } catch (err) {
-            setError('Ошибка удаления товара')
+            setError(`Ошибка удаления товара ${err.data}`)
         }
     }
 
@@ -145,7 +146,7 @@ export default function Cart() {
                                             </button>
                                         </div>
                                         <button
-                                            onClick={() => removeItem(item.id)}
+                                            onClick={() => removeItem(item.watch.id)}
                                             className="remove-item"
                                         >
                                             Удалить
