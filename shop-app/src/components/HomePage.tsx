@@ -39,6 +39,14 @@ export default function HomePage() {
                     title="Новинки"
                     watches={allWatches}
                 />
+                <HorizontalProductsScroll
+                    title="Топ дорогих"
+                    watches={allWatches}
+                />
+                <HorizontalProductsScroll
+                    title="Доступные модели"
+                    watches={allWatches}
+                />
             </div>
         </div>
     );

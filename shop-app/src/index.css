@@ -54,6 +54,58 @@
   --leading-tight: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
+  /* Цвета */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --card-bg: #ffffff;
+  --card-image-bg: #f8f8f8;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+
+  /* Тени */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Шрифты */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --font-accent: 'Manrope', sans-serif;
+
+  /* Веса шрифтов */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Размеры текста */
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-md: 1rem;      /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+
+  /* Отступы */
+  --spacing-xs: 0.5rem;  /* 8px */
+  --spacing-sm: 0.75rem; /* 12px */
+  --spacing-md: 1rem;    /* 16px */
+
+  /* Радиусы */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Анимации */
+  --transition-default: 0.2s ease;
+  --transition-fast: 0.1s ease;
+
+  /* Высота изображения */
+  --product-image-height: 200px;
+  --product-image-height-mobile: 160px;
+
+  /* Высота строки */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
 }
 
 /* Темная тема */
@@ -68,6 +120,12 @@
     --bg-color: #1a1a1a;
     --border-color: #444;
     --disabled-color: #6b7280;
+    --card-bg: #1a1a1a;
+    --card-image-bg: #2d2d2d;
+    --text-primary: #f5f5f5;
+    --text-secondary: #aaaaaa;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
 

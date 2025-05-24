@@ -7,61 +7,108 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-md);
+    padding: 0 var(--spacing-sm);
 }
 
 .horizontal-scroll__title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
+    font-family: var(--font-accent);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
     margin: 0;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-left: var(--spacing-sm);
+}
+
+.horizontal-scroll__title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: var(--primary);
+    border-radius: var(--radius-md);
 }
 
 .horizontal-scroll__controls {
     display: none;
-    gap: 10px;
+    gap: var(--spacing-xs);
 }
 
 .horizontal-scroll__button {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: white;
-    border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
-    font-size: 16px;
+    font-size: var(--text-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all var(--transition-default);
+    color: var(--text-secondary);
 }
 
 .horizontal-scroll__button:hover {
-    background: #f5f5f5;
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
     transform: scale(1.05);
+}
+
+.horizontal-scroll__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+    transform: none;
 }
 
 .horizontal-scroll__container {
     display: flex;
-    gap: 20px;
+    gap: var(--spacing-md);
     overflow-x: auto;
-    padding-bottom: 20px;
-    scrollbar-width: none; /* Для Firefox */
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
 }
 
 .horizontal-scroll__container::-webkit-scrollbar {
-    display: none; /* Для Chrome/Safari */
+    display: none;
 }
 
 .horizontal-scroll__item {
-    flex: 0 0 260px;
+    flex: 0 0 calc(85% - var(--spacing-md));
+    scroll-snap-align: start;
+    transition: transform var(--transition-default);
+}
+
+.horizontal-scroll__item:hover {
+    transform: translateY(-5px);
 }
 
 .horizontal-scroll__empty {
-    color: #777;
-    padding: 20px;
+    color: var(--text-secondary);
+    padding: var(--spacing-md);
     font-style: italic;
+    text-align: center;
+    width: 100%;
+}
+
+/* Анимация загрузки */
+.horizontal-scroll__loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-md) 0;
 }
 
 /* Адаптивность */
@@ -71,12 +118,35 @@
     }
 
     .horizontal-scroll__item {
-        flex: 0 0 300px;
+        flex: 0 0 calc(40% - var(--spacing-md));
     }
 }
 
 @media (min-width: 1024px) {
     .horizontal-scroll__item {
-        flex: 0 0 320px;
+        flex: 0 0 calc(30% - var(--spacing-md));
+    }
+
+    .horizontal-scroll__title {
+        font-size: var(--text-2xl);
+    }
+}
+
+@media (min-width: 1280px) {
+    .horizontal-scroll__item {
+        flex: 0 0 calc(22% - var(--spacing-md));
+    }
+}
+
+/* Эффекты для темной темы */
+@media (prefers-color-scheme: dark) {
+    .horizontal-scroll__button {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
+
+    .horizontal-scroll__button:hover {
+        background: var(--primary);
+        border-color: var(--primary);
     }
 }
