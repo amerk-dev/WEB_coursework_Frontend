@@ -71,6 +71,7 @@ export default function Cart() {
             )
             fetchCart()
         } catch (err) {
+            // @ts-ignore
             setError(`Ошибка удаления товара ${err.data}`)
         }
     }
@@ -103,7 +104,6 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <h2 className="cart-title">Корзина</h2>
 
             {cartItems.length === 0 ? (
                 <div className="cart-empty">

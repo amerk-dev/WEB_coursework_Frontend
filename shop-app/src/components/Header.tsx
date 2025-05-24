@@ -16,22 +16,22 @@ export default function Header() {
                     <ul className="nav-list">
                         <li className="nav-item">
                             <NavLink
+                                to="/"
+                                className={({isActive}) =>
+                                    isActive ? 'nav-link active' : 'nav-link'
+                                }
+                            >
+                                Главная
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink
                                 to="/catalog"
                                 className={({isActive}) =>
                                     isActive ? 'nav-link active' : 'nav-link'
                                 }
                             >
                                 Каталог
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                to="/search"
-                                className={({isActive}) =>
-                                    isActive ? 'nav-link active' : 'nav-link'
-                                }
-                            >
-                                Поиск
                             </NavLink>
                         </li>
                         <li className="nav-item">

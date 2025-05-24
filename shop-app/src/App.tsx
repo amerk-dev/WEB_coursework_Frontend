@@ -6,6 +6,7 @@ import HomePage from './components/HomePage';
 import Cart from './components/Cart/Cart'
 import ProductDetails from "./components/ProductDetails.tsx";
 import Header from "./components/Header.tsx";
+import CatalogPage from "./components/Catalog/Catalog.tsx";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/catalog" element={<CatalogPage/>} />
                     <Route path="/watches/:id" element={<ProductDetails />} />
                 </Routes>
             </Router>
