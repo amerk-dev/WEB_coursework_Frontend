@@ -29,6 +29,7 @@ export default function Cart() {
                     Authorization: `Bearer ${token}`
                 }
             })
+            console.log(response.data)
             setCartItems(response.data.items)
         } catch (err) {
             setError('Ошибка загрузки корзины')
@@ -42,7 +43,7 @@ export default function Cart() {
             await axios.post(
                 `${import.meta.env.VITE_API_URL}/api/cart/carts/update-item/`,
                 {
-                    item_id: itemId,
+                    watch_id: itemId,
                     quantity: newQuantity
                 },
                 {
@@ -53,7 +54,8 @@ export default function Cart() {
             )
             fetchCart()
         } catch (err) {
-            setError('Ошибка обновления количества')
+            console.log(err)
+            setError(`Ошибка обновления количества ${err}`)
         }
     }
 
@@ -131,7 +133,7 @@ export default function Cart() {
                                     <div className="item-controls">
                                         <div className="quantity-control">
                                             <button
-                                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                onClick={() => updateQuantity(item.watch.id, item.quantity - 1)}
                                                 className="quantity-btn"
                                                 disabled={item.quantity <= 1}
                                             >
@@ -139,7 +141,7 @@ export default function Cart() {
                                             </button>
                                             <span className="quantity-value">{item.quantity}</span>
                                             <button
-                                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                onClick={() => updateQuantity(item.watch.id, item.quantity + 1)}
                                                 className="quantity-btn"
                                             >
                                                 +
