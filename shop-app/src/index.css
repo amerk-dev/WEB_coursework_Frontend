@@ -23,3 +23,35 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --error-color: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --text-color: #333;
+  --text-light: #666;
+  --bg-color: #fff;
+  --border-color: #e0e0e0;
+  --disabled-color: #9ca3af;
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --error-color: #ef4444;
+    --error-bg: rgba(239, 68, 68, 0.2);
+    --text-color: #f5f5f5;
+    --text-light: #aaa;
+    --bg-color: #1a1a1a;
+    --border-color: #444;
+    --disabled-color: #6b7280;
+  }
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}

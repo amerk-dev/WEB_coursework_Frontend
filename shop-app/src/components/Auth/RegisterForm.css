@@ -1,0 +1,122 @@
+/* Основные стили */
+.register-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.register-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Группы полей формы */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-input {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Сообщение об ошибке */
+.register-error {
+    color: var(--error-color);
+    font-size: 14px;
+    padding: 10px;
+    background-color: var(--error-bg);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Кнопка регистрации */
+.register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.register-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.register-button:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+/* Футер формы */
+.register-footer {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-top: 10px;
+}
+
+.login-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .register-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .register-title {
+        font-size: 20px;
+    }
+
+    .form-input {
+        padding: 10px 12px;
+    }
+
+    .register-button {
+        padding: 10px;
+    }
+}

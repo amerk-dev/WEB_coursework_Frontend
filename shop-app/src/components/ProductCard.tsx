@@ -1,46 +1,45 @@
-import { Link } from 'react-router-dom'
-import AddToCartButton from './AddToCartButton'
-import type {Watch} from "../types/watch.ts";
+import { Link } from 'react-router-dom';
+import AddToCartButton from './AddToCartButton';
+import type { Watch } from "../types/watch.ts";
+import './styles/ProductCard.css'; // Импорт CSS файла со стилями
 
 export default function ProductCard({ watch }: { watch: Watch }) {
     return (
-        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow h-full flex flex-col">
+        <div className="product-card">
             <Link
                 to={`/watches/${watch.id}`}
-                className="block relative h-48 overflow-hidden"
+                className="product-card__image-link"
             >
                 <img
                     src={watch.image}
                     alt={watch.name}
-                    className="w-full h-full object-contain p-4"
+                    className="product-card__image"
                     loading="lazy"
                 />
             </Link>
 
-            <div className="p-4 flex flex-col flex-1">
-                <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2">
+            <div className="product-card__content">
+                <div className="product-card__info">
+                    <h3 className="product-card__title">
                         <Link
                             to={`/watches/${watch.id}`}
-                            className="hover:text-blue-600 transition-colors"
+                            className="product-card__title-link"
                         >
                             {watch.name}
                         </Link>
                     </h3>
-                    <p className="text-gray-600 text-sm mb-2">
+                    <p className="product-card__brand">
                         {watch.brand.name}
                     </p>
                 </div>
 
-                <div className="mt-4">
-                    <div className="flex justify-between items-center">
-            <span className="text-xl font-bold">
-              {parseFloat(watch.price).toLocaleString('ru-RU')} ₽
-            </span>
-                        <AddToCartButton watchId={watch.id} />
-                    </div>
+                <div className="product-card__footer">
+                    <span className="product-card__price">
+                        {parseFloat(watch.price).toLocaleString('ru-RU')} ₽
+                    </span>
+                    <AddToCartButton watchId={watch.id} />
                 </div>
             </div>
         </div>
-    )
+    );
 }

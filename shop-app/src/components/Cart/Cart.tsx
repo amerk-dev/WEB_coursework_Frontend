@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { Link } from "react-router-dom"
 import axios from 'axios'
+import './Cart.css'
 
 interface CartItem {
     id: number
@@ -21,7 +22,6 @@ export default function Cart() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
 
-    // Получение корзины
     const fetchCart = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart/carts/my-cart/`, {
@@ -37,7 +37,6 @@ export default function Cart() {
         }
     }
 
-    // Изменение количества
     const updateQuantity = async (itemId: number, newQuantity: number) => {
         try {
             await axios.post(
@@ -58,7 +57,6 @@ export default function Cart() {
         }
     }
 
-    // Удаление товара
     const removeItem = async (itemId: number) => {
         try {
             await axios.delete(
@@ -76,7 +74,6 @@ export default function Cart() {
         }
     }
 
-    // Общая сумма
     const totalAmount = cartItems.reduce(
         (sum, item) => sum + parseFloat(item.total_price),
         0
@@ -88,14 +85,11 @@ export default function Cart() {
 
     if (!token) {
         return (
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <h2 className="text-3xl font-bold mb-8">Корзина</h2>
-                <div className="text-center py-8">
-                    <p className="text-xl mb-4">Для просмотра корзины необходимо авторизоваться</p>
-                    <Link
-                        to="/login"
-                        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 inline-block"
-                    >
+            <div className="cart-container unauthorized">
+                <h2 className="cart-title">Корзина</h2>
+                <div className="cart-auth-prompt">
+                    <p className="prompt-message">Для просмотра корзины необходимо авторизоваться</p>
+                    <Link to="/login" className="login-button">
                         Войти
                     </Link>
                 </div>
@@ -103,72 +97,66 @@ export default function Cart() {
         )
     }
 
-    if (loading) return <div className="text-center py-8">Загрузка корзины...</div>
-    if (error) return <div className="text-red-500 text-center py-8">{error}</div>
+    if (loading) return <div className="cart-loading">Загрузка корзины...</div>
+    if (error) return <div className="cart-error">{error}</div>
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8">
-            <h2 className="text-3xl font-bold mb-8">Корзина</h2>
+        <div className="cart-container">
+            <h2 className="cart-title">Корзина</h2>
 
             {cartItems.length === 0 ? (
-                <div className="text-center py-8">
-                    <p className="text-xl mb-4">Ваша корзина пуста</p>
-                    <Link
-                        to="/"
-                        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-                    >
+                <div className="cart-empty">
+                    <p className="empty-message">Ваша корзина пуста</p>
+                    <Link to="/" className="continue-shopping">
                         Перейти к покупкам
                     </Link>
                 </div>
             ) : (
-                <div className="space-y-8">
-                    <div className="bg-white rounded-lg shadow-md divide-y divide-gray-200">
+                <div className="cart-content">
+                    <div className="cart-items-list">
                         {cartItems.map((item) => (
-                            <div key={item.id} className="p-4 flex items-start gap-6">
+                            <div key={item.id} className="cart-item">
                                 <img
                                     src={item.watch.image}
                                     alt={item.watch.name}
-                                    className="w-32 h-32 object-contain"
+                                    className="item-image"
                                 />
-                                <div className="flex-1">
-                                    <h3 className="text-xl font-semibold">
-                                        <Link
-                                            to={`/watches/${item.watch.id}`}
-                                            className="hover:text-blue-600"
-                                        >
+                                <div className="item-details">
+                                    <h3 className="item-name">
+                                        <Link to={`/watches/${item.watch.id}`}>
                                             {item.watch.name}
                                         </Link>
                                     </h3>
-                                    <div className="mt-2 flex items-center gap-4">
-                                        <div className="flex items-center border rounded">
+                                    <div className="item-controls">
+                                        <div className="quantity-control">
                                             <button
                                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                                className="px-3 py-1 hover:bg-gray-100"
+                                                className="quantity-btn"
                                                 disabled={item.quantity <= 1}
                                             >
                                                 -
                                             </button>
-                                            <span className="px-4">{item.quantity}</span>
+                                            <span className="quantity-value">{item.quantity}</span>
                                             <button
                                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                                className="px-3 py-1 hover:bg-gray-100"
+                                                className="quantity-btn"
                                             >
                                                 +
                                             </button>
                                         </div>
                                         <button
                                             onClick={() => removeItem(item.id)}
-                                            className="text-red-600 hover:text-red-800"
+                                            className="remove-item"
                                         >
                                             Удалить
                                         </button>
                                     </div>
                                 </div>
-                                <div className="text-right">
-                                    <div className="text-2xl font-bold">
+                                <div className="item-pricing">
+                                    <div className="item-total">
                                         {parseFloat(item.total_price).toLocaleString('ru-RU')} ₽
                                     </div>
-                                    <div className="text-gray-500 mt-1">
+                                    <div className="item-price">
                                         {parseFloat(item.watch.price).toLocaleString('ru-RU')} ₽ / шт
                                     </div>
                                 </div>
@@ -176,15 +164,13 @@ export default function Cart() {
                         ))}
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <div className="flex justify-between items-center">
-                            <div className="text-2xl font-bold">
-                                Итого: {totalAmount.toLocaleString('ru-RU')} ₽
-                            </div>
-                            <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
-                                Оформить заказ
-                            </button>
+                    <div className="cart-summary">
+                        <div className="total-amount">
+                            Итого: {totalAmount.toLocaleString('ru-RU')} ₽
                         </div>
+                        <button className="checkout-button">
+                            Оформить заказ
+                        </button>
                     </div>
                 </div>
             )}

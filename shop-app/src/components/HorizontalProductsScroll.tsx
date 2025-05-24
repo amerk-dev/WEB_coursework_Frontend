@@ -1,41 +1,46 @@
-import type {Watch} from '../types/watch'
-import ProductCard from './ProductCard'
-import { useRef } from 'react'
+import type { Watch } from '../types/watch';
+import ProductCard from './ProductCard';
+import { useRef } from 'react';
+import './styles/HorizontalProductsScroll.css'; // Импорт CSS файла со стилями
 
 export default function HorizontalProductsScroll({
                                                      title,
-                                                     watches = [], // Добавляем значение по умолчанию
+                                                     watches = [],
                                                  }: {
-    title: string
-    watches?: Watch[] // Делаем проп необязательным
+    title: string;
+    watches?: Watch[];
 }) {
-    const scrollRef = useRef<HTMLDivElement>(null)
+    const scrollRef = useRef<HTMLDivElement>(null);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollRef.current) {
-            const scrollAmount = direction === 'left' ? -500 : 500
+            const scrollAmount = direction === 'left' ? -500 : 500;
             scrollRef.current.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth'
-            })
+            });
         }
-    }
+    };
 
     return (
-        <div className="relative group">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-bold">{title}</h3>
-                {watches.length > 0 && ( // Показываем кнопки только если есть товары
-                    <div className="hidden md:flex gap-2">
+        <div className="horizontal-scroll">
+            <div className="horizontal-scroll__header">
+                <h3 className="horizontal-scroll__title">{title}</h3>
+                {watches.length > 0 && (
+                    <div className="horizontal-scroll__controls">
                         <button
                             onClick={() => scroll('left')}
-                            className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-100"
+                            className="horizontal-scroll__button horizontal-scroll__button--left"
+                            aria-label="Прокрутить влево"
                         >
+                            &lt;
                         </button>
                         <button
                             onClick={() => scroll('right')}
-                            className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-100"
+                            className="horizontal-scroll__button horizontal-scroll__button--right"
+                            aria-label="Прокрутить вправо"
                         >
+                            &gt;
                         </button>
                     </div>
                 )}
@@ -43,24 +48,23 @@ export default function HorizontalProductsScroll({
 
             <div
                 ref={scrollRef}
-                className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide"
+                className="horizontal-scroll__container"
             >
-                {watches?.map((watch) => ( // Добавляем опциональный чейнинг
+                {watches?.map((watch) => (
                     <div
                         key={watch.id}
-                        className="flex-shrink-0 w-64 md:w-72 lg:w-80"
+                        className="horizontal-scroll__item"
                     >
                         <ProductCard watch={watch} />
                     </div>
                 ))}
 
-                {/* Показываем заглушку если товаров нет */}
                 {watches.length === 0 && (
-                    <div className="text-gray-500 p-4">
+                    <div className="horizontal-scroll__empty">
                         Товары не найдены
                     </div>
                 )}
             </div>
         </div>
-    )
+    );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
+import './styles/AddToCartButton.css'
 
 export default function AddToCartButton({ watchId }: { watchId: number }) {
     const [loading, setLoading] = useState(false)
@@ -23,7 +24,6 @@ export default function AddToCartButton({ watchId }: { watchId: number }) {
                     }
                 }
             )
-            alert('Товар добавлен в корзину')
         } catch (error) {
             alert('Ошибка при добавлении в корзину')
         } finally {
@@ -35,9 +35,9 @@ export default function AddToCartButton({ watchId }: { watchId: number }) {
         <button
             onClick={handleAddToCart}
             disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className={`add-to-cart-button ${loading ? 'add-to-cart-button--loading' : ''}`}
         >
             {loading ? 'Добавление...' : 'В корзину'}
         </button>
-    )
+    );
 }
