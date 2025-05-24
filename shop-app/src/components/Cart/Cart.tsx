@@ -108,7 +108,7 @@ export default function Cart() {
             {cartItems.length === 0 ? (
                 <div className="cart-empty">
                     <p className="empty-message">Ваша корзина пуста</p>
-                    <Link to="/" className="continue-shopping">
+                    <Link to="/catalog" className="continue-shopping">
                         Перейти к покупкам
                     </Link>
                 </div>
