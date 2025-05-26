@@ -1,7 +1,9 @@
 .admin-container {
     max-width: 1200px;
-    margin: var(--spacing-xl) auto;
+    margin: var(--spacing-md) auto;
     padding: var(--spacing-md);
+    background: var(--bg-color);
+    border-radius: var(--radius-md);
 }
 
 .admin-title {
@@ -9,15 +11,32 @@
     font-size: var(--text-3xl);
     font-weight: var(--font-bold);
     color: var(--text-primary);
-    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.admin-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--primary);
+    margin: var(--spacing-sm) auto 0;
+    border-radius: 2px;
 }
 
 .watch-form {
     background: var(--card-bg);
     padding: var(--spacing-md);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     margin-bottom: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.watch-form:hover {
+    transform: translateY(-5px);
 }
 
 .form-group {
@@ -29,6 +48,7 @@
     font-weight: var(--font-medium);
     color: var(--text-primary);
     margin-bottom: var(--spacing-xs);
+    display: block;
 }
 
 .form-row {
@@ -51,10 +71,24 @@ select {
     color: var(--text-primary);
     font-size: var(--text-md);
     transition: all var(--transition-default);
+    scrollbar-width: thin;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #f9fafb;
 }
 
 select {
-    background: var(--bg-color) url("data:image/svg+xml,...") no-repeat right var(--spacing-sm) center;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236B7280'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a1 1 0 011.41-.02L10 10.59l3.38-3.4a1 1 0 011.43 1.42l-4.09 4.1a1 1 0 01-1.42 0L5.21 8.63a1 1 0 01-.02-1.42z' clip-rule='evenodd' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-sm) center;
+    background-size: 1.2em 1.2em;
+    padding-right: 2.5rem;
 }
 
 .checkbox-label {
@@ -67,6 +101,7 @@ select {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+    position: relative;
 }
 
 .image-preview {
@@ -75,6 +110,10 @@ select {
     border: 2px dashed var(--border-color);
     border-radius: var(--radius-md);
     background: var(--card-image-bg);
+    background-size: cover;
+    background-position: center;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
 }
 
 .image-preview:hover {
@@ -99,6 +138,14 @@ select {
     border-radius: var(--radius-md);
     font-weight: var(--font-semibold);
     transition: all var(--transition-default);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.submit-button svg {
+    width: 1em;
+    height: 1em;
 }
 
 .submit-button:hover:not(:disabled) {
@@ -111,6 +158,14 @@ select {
     color: var(--bg-color);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.cancel-button svg {
+    width: 1em;
+    height: 1em;
 }
 
 .watches-list {
@@ -118,26 +173,53 @@ select {
 }
 
 table {
+    width: 100%;
     background: var(--card-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: var(--spacing-sm);
     border-bottom: 1px solid var(--border-color);
+    text-align: left;
 }
 
 th {
     background: var(--bg-color);
     font-weight: var(--font-semibold);
+    color: var(--text-secondary);
+}
+
+.edit-button,
+.delete-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    transition: all 0.3s ease;
 }
 
 .edit-button {
     background: var(--primary);
     color: var(--bg-color);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--radius-sm);
+}
+
+.delete-button {
+    background: var(--error-color);
+    color: var(--bg-color);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
 }
 
 .pagination button {
@@ -145,16 +227,29 @@ th {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     background: var(--card-bg);
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+    background: var(--primary);
+    color: var(--bg-color);
+    border-color: var(--primary);
 }
 
 .pagination button.active {
     background: var(--primary);
     border-color: var(--primary);
+    color: var(--bg-color);
+    font-weight: bold;
 }
 
 .alert {
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .alert.error {
