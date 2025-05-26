@@ -7,6 +7,7 @@ import Cart from './components/Cart/Cart'
 import ProductDetails from "./components/ProductDetails.tsx";
 import Header from "./components/Header.tsx";
 import CatalogPage from "./components/Catalog/Catalog.tsx";
+import AdminPage from "./components/AdminPanel/AdminPage.tsx";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/catalog" element={<CatalogPage/>} />
                     <Route path="/watches/:id" element={<ProductDetails />} />
+                    <Route path="/admin" element={<AdminPage/>}/>
                 </Routes>
             </Router>
         </AuthProvider>
