@@ -67,8 +67,8 @@ export default function CatalogPage() {
     // Получение списка брендов
     const fetchBrands = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/watches/brands/`);
-            setBrands(response.data);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/brands/`);
+            setBrands(response.data.results);
         } catch (err) {
             console.error('Ошибка загрузки брендов', err);
         }
