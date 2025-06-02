@@ -1,0 +1,115 @@
+/* CheckoutForm.css */
+
+.checkout-form {
+  max-width: 480px; /* Немного увеличим для комфорта */
+  margin: 40px auto;
+  padding: 30px 35px;
+  background-color: var(--bg-color, #fff); /* Используем переменную с fallback */
+  border-radius: 12px; /* Чуть больше скругление */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Немного изменим тень */
+  font-family: var(--font-main, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif); /* Используем переменную */
+}
+
+.checkout-form h2 {
+  text-align: center;
+  margin-top: 0; /* Уберем верхний отступ, если он не нужен */
+  margin-bottom: 30px; /* Больше отступ снизу */
+  color: var(--text-color, #333);
+  font-family: var(--font-heading, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif); /* Переменная для заголовков */
+  font-weight: 700;
+  font-size: 1.8rem; /* 28.8px */
+  line-height: 1.3;
+}
+
+.checkout-form label {
+  display: block; /* Уже есть, но для ясности */
+  margin-bottom: 20px; /* Больше отступ между полями */
+  font-weight: 600;
+  font-size: 0.95rem; /* 15.2px, чуть меньше для метки */
+  color: var(--text-light, #555); /* Переменная для более светлого текста метки */
+}
+
+/* Общие стили для всех input, кроме submit */
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="tel"] { /* Добавляем input[type="tel"] */
+  width: 100%; /* Используем 100% и box-sizing */
+  padding: 12px 15px;
+  margin-top: 8px; /* Отступ от текста метки до поля ввода */
+  border: 1px solid var(--border-color, #ccc); /* Переменная для рамки */
+  border-radius: 8px; /* Больше скругление */
+  font-size: 1rem; /* 16px */
+  font-family: var(--font-main, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  color: var(--text-color, #333);
+  background-color: var(--bg-color, #fff); /* Фон поля, если отличается от фона формы */
+  box-sizing: border-box; /* Важно для width: 100% + padding */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Убираем специфичность по типу для :focus, чтобы применить ко всем */
+.checkout-form input:not([type="submit"]):focus { /* Применяем ко всем input, кроме submit */
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+  /* box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Более современный вид фокуса */
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 0,123,255), 0.25); /* Используем RGB компоненты, если есть */
+}
+
+/* Стили для плейсхолдера */
+.checkout-form input::placeholder {
+  color: var(--text-light, #aaa);
+  opacity: 1; /* Firefox имеет другую прозрачность по умолчанию */
+}
+
+/* Стили для поля телефона (специфичные, если нужны) */
+.checkout-form input[type="tel"] {
+  /* Здесь можно добавить специфичные стили для телефона, если нужно,
+     например, иконку или другие настройки форматирования */
+}
+
+/* Валидация (пример) */
+.checkout-form input:invalid {
+  border-color: var(--error-color, #dc3545); /* Красная рамка при ошибке HTML5 валидации */
+}
+.checkout-form input:invalid:focus {
+  box-shadow: 0 0 0 3px rgba(var(--error-color-rgb, 220,53,69), 0.25);
+}
+
+/* Можно добавить класс для сообщений об ошибках под полями, если они есть */
+.checkout-form .error-message {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--error-color, #dc3545);
+}
+
+
+.checkout-form button[type="submit"] {
+  background-color: var(--primary-color, #007bff);
+  color: var(--bg-color, #fff); /* Обычно текст на кнопке контрастный фону кнопки */
+  padding: 14px 20px; /* Добавим горизонтальный padding */
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem; /* 17.6px, немного уменьшим для баланса */
+  font-family: var(--font-main, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  font-weight: 600; /* Сделаем чуть менее жирным для современного вида */
+  cursor: pointer;
+  width: 100%;
+  margin-top: 25px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  text-transform: uppercase; /* Делаем текст кнопки заглавным */
+  letter-spacing: 0.5px; /* Небольшой интервал между буквами */
+}
+
+.checkout-form button[type="submit"]:hover {
+  background-color: var(--primary-hover, #0056b3); /* Используем переменную */
+}
+
+.checkout-form button[type="submit"]:active {
+  transform: scale(0.98); /* Легкий эффект нажатия */
+}
+
+.checkout-form button[type="submit"]:disabled {
+  background-color: var(--disabled-color, #ccc);
+  color: var(--text-light, #666);
+  cursor: not-allowed;
+}

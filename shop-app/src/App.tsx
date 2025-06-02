@@ -8,6 +8,7 @@ import ProductDetails from "./components/ProductDetails.tsx";
 import Header from "./components/Header.tsx";
 import CatalogPage from "./components/Catalog/Catalog.tsx";
 import AdminPage from "./components/AdminPanel/AdminPage.tsx";
+import CheckoutForm from "./components/Checkout/CheckoutForm.tsx"
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/catalog" element={<CatalogPage/>} />
                     <Route path="/watches/:id" element={<ProductDetails />} />
                     <Route path="/admin" element={<AdminPage/>}/>
+                    <Route path="/checkout" element={<CheckoutForm />} />
                 </Routes>
             </Router>
         </AuthProvider>

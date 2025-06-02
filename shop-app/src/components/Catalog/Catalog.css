@@ -40,6 +40,9 @@
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+.filter-group select option{
+    color: #1a1a1a;
+}
 
 .filter-group label {
     display: flex;
@@ -60,7 +63,7 @@
 }
 
 .reset-filters:hover {
-    background-color: var(--error-hover);
+    background-color: var(--primary-color);
 }
 
 .products-section {

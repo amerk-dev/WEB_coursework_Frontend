@@ -103,7 +103,9 @@ export default function Cart() {
 
     if (loading) return <div className="cart-loading">Загрузка корзины...</div>
     if (error) return <div className="cart-error">{error}</div>
-
+    const handleCheckout = () => {
+        navigate('/checkout');
+    };
     return (
         <div className="cart-container">
 
@@ -171,7 +173,7 @@ export default function Cart() {
                         <div className="total-amount">
                             Итого: {totalAmount.toLocaleString('ru-RU')} ₽
                         </div>
-                        <button className="checkout-button">
+                        <button className="checkout-button" onClick={handleCheckout}>
                             Оформить заказ
                         </button>
                     </div>

@@ -6,6 +6,9 @@ import './styles/HomePage.css'; // Импорт CSS файла со стилям
 
 export default function HomePage() {
     const [allWatches, setNewArrivals] = useState<Watch[]>([]);
+    const [mostCostWatches, setmostCostWatches] = useState<Watch[]>([]);
+    const [lowPriseWatch, setlowPriseWatch] = useState<Watch[]>([]);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +24,36 @@ export default function HomePage() {
                 );
                 console.log('Получены данные:', response.data);
                 setNewArrivals(response.data.results);
+            } catch (error) {
+                console.error('Ошибка получения данных:', error);
+            }
+            try {
+                const response = await axios.get(
+                    'http://localhost:8000/api/watches/?in_stock=true&ordering=-price',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+                console.log('Получены данные:', response.data);
+                setmostCostWatches(response.data.results);
+            } catch (error) {
+                console.error('Ошибка получения данных:', error);
+            }
+            try {
+                const response = await axios.get(
+                    'http://localhost:8000/api/watches/?in_stock=true&ordering=price',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+                console.log('Получены данные:', response.data);
+                setlowPriseWatch(response.data.results);
             } catch (error) {
                 console.error('Ошибка получения данных:', error);
             }
@@ -41,11 +74,11 @@ export default function HomePage() {
                 />
                 <HorizontalProductsScroll
                     title="Топ дорогих"
-                    watches={allWatches}
+                    watches={mostCostWatches}
                 />
                 <HorizontalProductsScroll
                     title="Доступные модели"
-                    watches={allWatches}
+                    watches={lowPriseWatch}
                 />
             </div>
         </div>
